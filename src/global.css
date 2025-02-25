@@ -1,0 +1,190 @@
+/* index.css - 默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    background-color: #f9f9f9; /* 默认背景色 */
+    color: #333; /* 默认文本颜色 */
+}
+
+/* 使 a 标签没有下划线 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 默认元素 */
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+ul,
+ol {
+    list-style: none; /* 去除默认的列表项符号 */
+}
+
+button {
+    cursor: pointer; /* 按钮鼠标悬停样式 */
+    background-color: transparent;
+    border: none;
+}
+
+/* 使 h1 至 h6 标签的文本大小更大 */
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.25em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h6 {
+    font-size: 0.875em;
+}
+
+/* 默认的表格样式 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+p{
+    margin: 0;
+}
+
+/* 默认的 form 样式 */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*flex布局*/
+.s_flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.flex_1 {
+    -prefix-box-flex: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.flex_dir {
+    flex-direction: column;
+}
+
+.flex_wrap {
+    flex-wrap: wrap;
+}
+
+.jc_ct {
+    justify-content: center;
+}
+
+.ai_ct {
+    align-items: center;
+}
+
+.ai_bs {
+    align-items: baseline;
+}
+
+.jc_bt {
+    justify-content: space-between;
+}
+
+.jc_ad {
+    justify-content: space-around;
+}
+
+.jc_fe {
+    justify-content: flex-end;
+}
+.big_title{
+    font-size: 0.5rem;
+}
+.small_title{
+    font-size: 0.3rem;
+}
+
+.jc_fs {
+    justify-content: flex-start;
+}
+
+.jc_se {
+    justify-content: space-evenly;
+}
+
+.ai_fe {
+    align-items: flex-end;
+}
+
+.ai_fs {
+    align-items: flex-start;
+}
+
+.imgs img{
+    width: 100%;
+    height: 100%;
+}
+
+.ec_1{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ec_2{
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+}
+.ec_3{
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+}
