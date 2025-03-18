@@ -1,0 +1,34 @@
+.login{
+  .loginTitle{
+    text-align: center;
+    span{
+      font-weight: 700;
+      font-size: 22px;
+      color: #333;
+    }
+  }
+  .customTabs {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    :global(.ant-tabs-nav) {
+      margin: 0;
+    }
+
+    :global(.ant-tabs-nav-list) {
+      width: 100%;
+      display: flex !important;
+    }
+
+    :global(.ant-tabs-tab) {
+      flex: 1;
+      display: flex !important;
+      justify-content: center;
+      margin: 0 !important;
+    }
+
+    :global(.ant-tabs-tab-btn) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

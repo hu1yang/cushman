@@ -1,19 +1,44 @@
 import axios, { AxiosInstance, AxiosResponse ,InternalAxiosRequestConfig  } from 'axios';
+import Cookies from 'js-cookie'
+export interface CustomData<D = any> {
+  code: number;
+  msg: string;
+  data?: D;
+}
 
 // 创建 axios 实例
 const instance: AxiosInstance = axios.create({
-  baseURL: 'https://api.example.com',  // 根据需要配置 API 基础地址
+  baseURL: process.env.UMI_APP_API_URL,  // 根据需要配置 API 基础地址
   timeout: 5000,  // 请求超时时间
+  headers: {
+    Accept: 'application/json',
+    post: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    'X-Requested-With': 'XMLHttpRequest',
+  },
 });
 
 
 // 请求拦截器
 instance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
+    async (config: InternalAxiosRequestConfig) => {
       // 可以在此处添加请求头，例如 token
-      const token = localStorage.getItem('token');
+      const token = Cookies.get('token')
       if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+        config.headers['Access-Token'] = token;
+      }
+      const date = new Date().valueOf(); // 时间戳
+      if (config.method === 'post') {
+        config.data = {
+          ...config.data,
+          timeStamp: date,
+        };
+      } else if (config.method === 'get') {
+        config.params = {
+          timeStamp: date,
+          ...config.params,
+        };
       }
       return config;
     },
@@ -25,9 +50,14 @@ instance.interceptors.request.use(
 
 // 响应拦截器
 instance.interceptors.response.use(
-    (response: AxiosResponse) => {
+    async (response: AxiosResponse) => {
       // 这里可以处理响应数据
-      return response.data;
+      if (response.status === 200) {
+        if (response.data.code === 403) {
+        }
+        return response;
+      }
+      return Promise.reject(response);
     },
     (error) => {
       // 错误处理（例如统一提示错误信息）
@@ -54,24 +84,26 @@ instance.interceptors.response.use(
     }
 );
 
-// 封装的 GET 请求
-const get = <T>(url: string, params?: object): Promise<T> => {
-  return instance.get(url, { params });
-};
+// 请求方法封装
+function get<D,T=any>(url: string, params: T): Promise<CustomData<D>> {
+  return instance
+  .get<CustomData<D>>(url, { params })
+  .then((response) => response.data)
+  .catch((error) => {
+    console.error(error);
+    throw error;
+  });
+}
+function post<D>(url: string, params: any): Promise<CustomData<D>> {
+  return instance
+  .post(url, params)
+  .then((response) => {
+    return response.data as CustomData<D>;
+  })
+  .catch((error) => {
+    console.error(error);
+    throw error;
+  });
+}
 
-// 封装的 POST 请求
-const post = <T>(url: string, data?: object): Promise<T> => {
-  return instance.post(url, data);
-};
-
-// 封装的 PUT 请求
-const put = <T>(url: string, data?: object): Promise<T> => {
-  return instance.put(url, data);
-};
-
-// 封装的 DELETE 请求
-const del = <T>(url: string): Promise<T> => {
-  return instance.delete(url);
-};
-
-export default { get, post, put, del };
+export default { get, post };

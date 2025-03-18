@@ -1,23 +1,17 @@
-import { Link, Outlet } from 'umi';
+import React,{useEffect} from 'react'
+import { Link, Outlet , useDispatch } from 'umi';
 import styles from './index.less';
-import {ConfigProvider} from 'antd'
 
 export default function Layout() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch({
+      type: 'user/setUserInfoEffects',
+    });
+  }, [dispatch]);
   return (
-      <ConfigProvider
-          theme={{
-            components: {
-              Table: {
-                /* 这里是你的组件 token */
-                headerBorderRadius:0
-              },
-            },
-          }}
-      >
-        <div className={styles.app_container}>
-
-          <Outlet />
-        </div>
-      </ConfigProvider>
+    <div className={styles.app_container}>
+      <Outlet />
+    </div>
   );
 }
