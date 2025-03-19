@@ -41,12 +41,6 @@ const routes = [
       meta: { name: 'tree' },
       layout: false,
   },
-    {
-        path:'/goods',
-        component: "goods/index",
-        meta: { name: 'goods' },
-        layout: false,
-    }
 ]
 
 export default routes
